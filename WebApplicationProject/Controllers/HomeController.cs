@@ -9,10 +9,10 @@ namespace WebApplicationProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext appDbContext;
         public HomeController(AppDbContext context)
         {
-            _context = context;
+            appDbContext = context;
         }
 
         public IActionResult Index()
@@ -31,8 +31,8 @@ namespace WebApplicationProject.Controllers
         [HttpPost]
         public IActionResult AddRequest(Request model)
         {
-            _context.Requests.Add(model);
-            _context.SaveChanges();
+            appDbContext.Requests.Add(model);
+            appDbContext.SaveChanges();
             return RedirectToAction(nameof(Tesekkur));
         }
         public IActionResult Tesekkur()
