@@ -9,14 +9,16 @@ namespace WebApplicationProject.Controllers
 {
     public class HomeController : Controller
     {
-        private AppDbContext appDbContext;
-        public HomeController(AppDbContext _context)
+        private readonly AppDbContext _context;
+        public HomeController(AppDbContext context)
         {
-            this.appDbContext = _context;
+            _context = context;
         }
+
         public IActionResult Index()
         {
-            return View();
+
+            return RedirectToAction(nameof(Privacy));
         }
 
         public IActionResult Privacy()
@@ -29,6 +31,8 @@ namespace WebApplicationProject.Controllers
         [HttpPost]
         public IActionResult AddRequest(Request model)
         {
+            _context.Requests.Add(model);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Tesekkur));
         }
         public IActionResult Tesekkur()

@@ -1,5 +1,30 @@
 ﻿@page
-@model WebApplicationProject.Views.Admin.DashboardModel
+@model List<WebApplicationProject.Models.Request>
 @{
+    ViewData["Title"] = "Istekler";
 }
-hello world!
+<h3>Istekler</h3>
+<table class="Table">
+    <thead>
+        <tr>
+            <th>Kullanici</th>
+            <th>Mesaj</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.KId</td>
+                <td>@item.Message</td>
+                <td>@item.Tarih</td>
+                <td>
+                <a asp-action="Delete" asp-route-id="item.RequestId">Delete</a>
+                <a asp-action="Edit" asp-route-id="item.RequestId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
